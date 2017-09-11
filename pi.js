@@ -1,7 +1,7 @@
 // Configure
 var timers = [
   {
-    hour: 4, minute: 14, text: "Hora Pi canaria!"
+    hour: 1, minute: 44, text: "Hora Pi canaria!", search: "adfjlasdbnviaberngklsenfgljksbnfksdbvfaksdbajdlkfvbalsdjbvadfv2"
   }
 ];
 
@@ -61,23 +61,59 @@ function SendTwit(text)
   })
 }
 
-function SearchTwits(text)
+function SearchTwits(i)
 {
-  //  search twitter for all tweets containing <text>
-  T.get('search/tweets', { q: text +' since:2017-09-10', count: 1 }, function(err, data, response) {
+  var search = timers[i].search;
+  
+  var date = todayDate()
+  T.get('search/tweets', { q: search +' since:' + date, count: 100 }, function(err, data, response) {
     if (err)
       console.log(err);
     else {
       console.log(data);
-      for (var i = 0; i < data.statuses.length; i++){
-        var id = data.statuses[i].id_str;
-        console.log("ID: " + id);
-        T.post('favorites/create', { id: id }, function (err, data, response) {
-          console.log(data);
-        });
+      for (var i = 0; i < data.statuses.length; i++)
+      {
+        if (inTime(i, data.statuses[i]))
+        {
+          var id = data.statuses[i].id_str;
+          console.log("ID: " + id);
+          T.post('favorites/create', { id: id }, function (err, data, response) {
+            console.log(data);
+          });
+        }
       }
     }
   })
+}
+
+function todayDate()
+{
+  var now = new Date();
+  
+  var y = now.getFullYear();
+  var m = now.getMonth();
+  var d = now.getDate();
+  
+  return y + "-" + m + "-" + d
+}
+
+function inTime(i, tweet)
+{
+  var t = timers[i]
+  
+  var now = new Date()
+  var start = new Date(now.getFullYear(), now.getMonth(), now.getDate(), t.hour, t.minute, 0, 0)
+  var end = new Date(now.getFullYear(), now.getMonth(), now.getDate(), t.hour, t.minute + 1, 0, 0)
+  
+  var tweetTime = new Date(tweet.created_at)
+  
+  console.log("Created at: " + tweetTime)
+  console.log("Now: " + now)
+  
+  var b = tweetTime >= start && tweetTime < end
+  console.log(b)
+  
+  return false
 }
 
 
@@ -85,4 +121,4 @@ function SearchTwits(text)
 
 //start();
 
-SearchTwits("adfjlasdbnviaberngklsenfgljksbnfksdbvfaksdbajdlkfvbalsdjbvadfv");
+SearchTwits(0);
