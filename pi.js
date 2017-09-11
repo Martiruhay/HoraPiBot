@@ -1,7 +1,7 @@
 // Configure
 var timers = [
   {
-    hour: 2, minute: 4, text: "test"
+    hour: 2, minute: 50, text: "Production test"
   }
 ];
 
@@ -30,18 +30,15 @@ function SendTwit(text)
 
 function start()
 {
-  var now = new Date();
-  console.log("Actual time: " + now);
-  
   for (var i = 0; i < timers.length; i++) {
-    
+    prepareTwit(i);
   }
-  
 }
 
 function prepareTwit(i)
 {
   var now = new Date();
+  console.log("Actual time: " + now);
   
   var t = timers[i];
     
@@ -55,7 +52,7 @@ function prepareTwit(i)
   setTimeout(TimeoutFunc, remaining, t.text);
   
   // 100 seconds after. The thing is it must be something grater to 1 minute (60000ms)
-  setTimeout(TimeoutFunc, remaining + 100000, t.text);
+  setTimeout(prepareTwit, remaining + 100000, i);
 }
 
 function TimeoutFunc(text)
