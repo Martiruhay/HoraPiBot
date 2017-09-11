@@ -1,0 +1,22 @@
+{
+  "name": "hora_pi_bot",
+  "version": "1.0.0",
+  "description": "Bot that tweets",
+  "main": "config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Martiruhay/HoraPiBot.git"
+  },
+  "author": "Marti Lloveras",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Martiruhay/HoraPiBot/issues"
+  },
+  "homepage": "https://github.com/Martiruhay/HoraPiBot#readme",
+  "dependencies": {
+    "twit": "^2.2.9"
+  }
+}
