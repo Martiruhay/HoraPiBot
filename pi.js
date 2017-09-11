@@ -14,20 +14,7 @@ var fs = require('fs'),
 var T = new Twit(config);
 
 
-function SendTwit(text)
-{
-  T.post('statuses/update', { status: text }, function(err, data, response)
-  {
-    if (err){
-      console.log(err);
-    }
-    else {
-      console.log(data);
-    }
-  })
-}
-
-
+// Initialize all timers
 function start()
 {
   for (var i = 0; i < timers.length; i++) {
@@ -51,7 +38,7 @@ function prepareTwit(i)
   
   setTimeout(TimeoutFunc, remaining, t.text);
   
-  // 100 seconds after. The thing is it must be something grater to 1 minute (60000ms)
+  // 100 seconds after. Must be something grater than 1 minute (60000ms)
   setTimeout(prepareTwit, remaining + 100000, i);
 }
 
@@ -61,7 +48,41 @@ function TimeoutFunc(text)
   SendTwit(text);
 }
 
+function SendTwit(text)
+{
+  T.post('statuses/update', { status: text }, function(err, data, response)
+  {
+    if (err){
+      console.log(err);
+    }
+    else {
+      console.log(data);
+    }
+  })
+}
+
+function SearchTwits(text)
+{
+  //  search twitter for all tweets containing <text>
+  T.get('search/tweets', { q: text +' since:2017-09-10', count: 1 }, function(err, data, response) {
+    if (err)
+      console.log(err);
+    else {
+      console.log(data);
+      for (var i = 0; i < data.statuses.length; i++){
+        var id = data.statuses[i].id_str;
+        console.log("ID: " + id);
+        T.post('favorites/create', { id: id }, function (err, data, response) {
+          console.log(data);
+        });
+      }
+    }
+  })
+}
+
 
 // EXECUTION START
 
-start();
+//start();
+
+SearchTwits("adfjlasdbnviaberngklsenfgljksbnfksdbvfaksdbajdlkfvbalsdjbvadfv");
