@@ -1,7 +1,7 @@
 // Configure
 var timers = [
   {
-    hour: 2, minute: 50, text: "Production test"
+    hour: 3, minute: 9, text: "Production test"
   }
 ];
 
