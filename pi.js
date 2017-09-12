@@ -1,7 +1,7 @@
 // Configure
 var timers = [
   {
-    hour: 1, minute: 44, text: "Hora Pi canaria!", search: "adfjlasdbnviaberngklsenfgljksbnfksdbvfaksdbajdlkfvbalsdjbvadfv2"
+    hour: 2, minute: 36, text: "Test start 4", search: "adfjlasdbnviaberngklsenfgljksbnfksdbvfaksdbajdlkfvbalsdjbvadf4"
   }
 ];
 
@@ -38,8 +38,9 @@ function prepareTwit(i)
   
   setTimeout(TimeoutFunc, remaining, t.text);
   
-  // 100 seconds after. Must be something grater than 1 minute (60000ms)
-  setTimeout(prepareTwit, remaining + 100000, i);
+  // Must be something grater than 1 minute (60000ms)
+  setTimeout(SearchTwits, remaining + 60001, i);
+  setTimeout(prepareTwit, remaining + 60001, i);
 }
 
 function TimeoutFunc(text)
@@ -71,11 +72,11 @@ function SearchTwits(i)
       console.log(err);
     else {
       console.log(data);
-      for (var i = 0; i < data.statuses.length; i++)
+      for (var j = 0; j < data.statuses.length; j++)
       {
-        if (inTime(i, data.statuses[i]))
+        if (inTime(i, data.statuses[j]))
         {
-          var id = data.statuses[i].id_str;
+          var id = data.statuses[j].id_str;
           console.log("ID: " + id);
           T.post('favorites/create', { id: id }, function (err, data, response) {
             console.log(data);
@@ -107,18 +108,20 @@ function inTime(i, tweet)
   
   var tweetTime = new Date(tweet.created_at)
   
-  console.log("Created at: " + tweetTime)
   console.log("Now: " + now)
+  console.log("Start: " + start)
+  console.log("Created at: " + tweetTime)
+  console.log("End: " + end)
   
-  var b = tweetTime >= start && tweetTime < end
+  var b = (tweetTime >= start && tweetTime < end)
   console.log(b)
   
-  return false
+  return b
 }
 
 
 // EXECUTION START
 
-//start();
+start();
 
-SearchTwits(0);
+//SearchTwits(0);
