@@ -9,7 +9,7 @@ fi
 echo "Starting bot..."
 
 # Start bot
-node pi.js > logs &
+node bot.js > logs &
 echo $!
 echo $! > pid
 
