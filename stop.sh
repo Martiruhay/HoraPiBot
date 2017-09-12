@@ -6,11 +6,12 @@ if [ -f pid ]; then
   
   pid=$(cat pid)
   kill $pid &> /dev/null
+  
   rm pid
   
   echo "Bot stopped!"
 else
-  echo "The bot is not running"
+  echo "The bot is not running."
 fi
 
 
