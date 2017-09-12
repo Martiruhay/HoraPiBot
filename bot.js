@@ -5,6 +5,9 @@ var timers = [
   },
   {
     hour: 4, minute: 14, text: "Hora Pi canaria!", search: "hora pi"
+  },
+  {
+    hour: 22, minute: 35, text: "Test ¯(°_o)/¯", search: "jadsiuofhasdijvnsdvnsdjfksdjkfhaskjf"
   }
 ];
 
