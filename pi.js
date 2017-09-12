@@ -2,6 +2,9 @@
 var timers = [
   {
     hour: 3, minute: 14, text: "Hora Pi!", search: "hora pi"
+  },
+  {
+    hour: 4, minute: 14, text: "Hora Pi canaria!", search: "hora pi"
   }
 ];
 
@@ -31,7 +34,7 @@ function prepareTwit(i)
     
   var remaining = new Date(now.getFullYear(), now.getMonth(), now.getDate(), t.hour, t.minute, 0, 0) - now;
   if (remaining < 0) {
-     remaining += 86400000; // it's after the configured hour, try tomorrow.
+     remaining += 86400000; // tomorrow
   }
   
   console.log(t.text + " set in about: " + remaining / 60000 + "minutes");
