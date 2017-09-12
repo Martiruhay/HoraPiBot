@@ -1,7 +1,7 @@
 // Configure
 var timers = [
   {
-    hour: 2, minute: 36, text: "Test start 4", search: "adfjlasdbnviaberngklsenfgljksbnfksdbvfaksdbajdlkfvbalsdjbvadf4"
+    hour: 3, minute: 14, text: "Hora Pi!", search: "hora pi"
   }
 ];
 
@@ -114,7 +114,7 @@ function inTime(i, tweet)
   console.log("End: " + end)
   
   var b = (tweetTime >= start && tweetTime < end)
-  console.log(b)
+  console.log("inTime?: " + b)
   
   return b
 }
@@ -123,5 +123,3 @@ function inTime(i, tweet)
 // EXECUTION START
 
 start();
-
-//SearchTwits(0);
