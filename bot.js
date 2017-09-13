@@ -93,9 +93,7 @@ function startStream(i)
     if (inTime(i, tweet))
     {
       var tweet_id = tweet.id_str
-      T.post('favorites/create', { id: tweet_id }, function (err, data, response) {
-        console.log(data);
-      });
+      T.post('favorites/create', { id: tweet_id }, _callback);
     }
   })
 }
