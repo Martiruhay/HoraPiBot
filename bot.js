@@ -42,30 +42,18 @@ function prepareTwit(i)
   
   console.log(t.text + " set in about: " + remaining / 60000 + "minutes");
   
-  setTimeout(TimeoutFunc, remaining, t.text);
+  setTimeout(SendTwit, remaining, t.text);
   
   // Must be something grater than 1 minute (60000ms)
   setTimeout(SearchTwits, remaining + 60001, i);
   setTimeout(prepareTwit, remaining + 60001, i);
 }
 
-function TimeoutFunc(text)
-{
-  console.log("Actual time: " + new Date());
-  SendTwit(text);
-}
-
 function SendTwit(text)
 {
-  T.post('statuses/update', { status: text }, function(err, data, response)
-  {
-    if (err){
-      console.log(err);
-    }
-    else {
-      console.log(data);
-    }
-  })
+  console.log("Actual time: " + new Date());
+  
+  T.post('statuses/update', { status: text }, _callback)
 }
 
 function SearchTwits(i)
