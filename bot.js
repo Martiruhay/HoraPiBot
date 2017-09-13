@@ -81,8 +81,7 @@ function startStream(i)
   stream.on('tweet', function (tweet) {
     if (inTime(i, tweet))
     {
-      var tweet_id = tweet.id_str
-      T.post('favorites/create', { id: tweet_id }, _callback);
+      like(tweet.id_str)
       count++;
     }
   })
