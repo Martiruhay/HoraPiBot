@@ -93,6 +93,25 @@ function SearchTwits(i)
   })
 }
 
+function startStream(i)
+{
+  console.log("Starting stream: " + t.search)
+  
+  var t = timers[i];
+  
+  var stream = T.stream('statuses/filter', { track: t.search })
+  
+  stream.on('tweet', function (tweet) {
+    if (inTime(i, tweet))
+    {
+      var tweet_id = tweet.id_str
+      T.post('favorites/create', { id: tweet_id }, function (err, data, response) {
+        console.log(data);
+      });
+    }
+  })
+}
+
 function todayDate()
 {
   var now = new Date();
@@ -123,6 +142,12 @@ function inTime(i, tweet)
   console.log("inTime?: " + b)
   
   return b
+}
+
+// Refactor pending
+function _callback(err, data, response)
+{
+  
 }
 
 
