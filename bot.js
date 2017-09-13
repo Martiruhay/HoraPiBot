@@ -7,7 +7,7 @@ var timers = [
     hour: 4, minute: 14, text: "Hora Pi canaria!", search: "hora pi"
   },
   {
-    hour: 22, minute: 35, text: "Test ¯(°_o)/¯", search: "jadsiuofhasdijvnsdvnsdjfksdjkfhaskjf"
+    hour: 3, minute: 28, text: "Test ¯(°..o)/¯", search: "jadsiuofhasdijvnsdvnsdjfksdjkfhaaaaa"
   }
 ];
 
@@ -42,21 +42,22 @@ function prepareTwit(i)
   
   console.log(t.text + " set in about: " + remaining / 60000 + "minutes");
   
+  setTimeout(startStream, remaining - 1000*10, i);  // ..(?).. 10 s earlier to ensure we catch the first tweet
   setTimeout(SendTwit, remaining, t.text);
   
   // Must be something grater than 1 minute (60000ms)
-  setTimeout(SearchTwits, remaining + 60001, i);
-  setTimeout(prepareTwit, remaining + 60001, i);
+  //setTimeout(SearchTwits, remaining + 60001, i);
+  //setTimeout(prepareTwit, remaining + 60001, i);
 }
 
 function SendTwit(text)
 {
   console.log("Actual time: " + new Date());
-  
-  T.post('statuses/update', { status: text }, _callback)
+  console.log("GO")
+  //T.post('statuses/update', { status: text }, _callback)
 }
 
-function SearchTwits(i)
+/*function SearchTwits(i)
 {
   var search = timers[i].search;
   
@@ -79,13 +80,14 @@ function SearchTwits(i)
       }
     }
   })
-}
+}*/
 
 function startStream(i)
 {
+  var t = timers[i];
+  
   console.log("Starting stream: " + t.search)
   
-  var t = timers[i];
   
   var stream = T.stream('statuses/filter', { track: t.search })
   
@@ -96,9 +98,21 @@ function startStream(i)
       T.post('favorites/create', { id: tweet_id }, _callback);
     }
   })
+  T.currentTwitStream = stream;
+  
+  // Stop the stream after 1 minute
+  setTimeout(stopStream, 1000*70);
 }
 
-function todayDate()
+function stopStream()
+{
+  if (T.currentTwitStream){
+    console.log("Stopping stream")
+    T.currentTwitStream.stop()
+  }
+}
+
+/*function todayDate()
 {
   var now = new Date();
   
@@ -107,7 +121,7 @@ function todayDate()
   var d = now.getDate();
   
   return y + "-" + m + "-" + d
-}
+}*/
 
 function inTime(i, tweet)
 {
@@ -130,10 +144,15 @@ function inTime(i, tweet)
   return b
 }
 
-// Refactor pending
+
 function _callback(err, data, response)
 {
+  console.log("RESPONSE: " + response)
   
+  if (err)
+    console.log(err)
+  else
+    console.log(data)
 }
 
 
