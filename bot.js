@@ -5,9 +5,6 @@ var timers = [
   },
   {
     hour: 4, minute: 14, text: "Hora Pi canaria!", search: "hora pi"
-  },
-  {
-    hour: 22, minute: 35, text: "test", search: "-----------test------------"
   }
 ];
 
@@ -43,13 +40,13 @@ function prepareTwit(i)
   console.log(t.text + " set in about: " + remaining / 60000 + "minutes");
   
   setTimeout(startStream, remaining - 1000*10, i);  // 10 seconds earlier to ensure we catch the first tweet
-  setTimeout(SendTwit, remaining, t.text);
+  setTimeout(sendTweet, remaining, t.text);
   
   // Must be something grater than 1 minute
   setTimeout(prepareTwit, remaining + 1000*70, i);
 }
 
-function SendTwit(text)
+function sendTweet(text)
 {
   console.log("Actual time: " + new Date())
   //console.log("GO!")
@@ -82,6 +79,7 @@ function startStream(i)
     if (inTime(i, tweet))
     {
       like(tweet.id_str)
+      retweet(tweet.id_str)
       count++;
     }
   })
