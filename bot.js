@@ -8,7 +8,7 @@ var timers = [
   }
   ,
   {
-    hour: 23, minute: 20, text: "(¬_¬)", search: "---test---"  }
+    hour: 23, minute: 51, text: "(¬_¬)", search: "----test----"  }
 ];
 
 
@@ -79,7 +79,7 @@ function startStream(i)
   var stream = T.stream('statuses/filter', { track: t.search })
   
   stream.on('tweet', function (tweet) {
-    if (inTime(i, tweet) && !tweet.retweeted)
+    if (inTime(i, tweet) && !isReply(tweet))
     {
       like(tweet.id_str)
       retweet(tweet.id_str)
@@ -121,6 +121,18 @@ function inTime(i, tweet)
   console.log("inTime?: " + b)
   
   return b
+}
+
+function isReply(tweet) {
+  if ( tweet.retweeted_status
+    || tweet.in_reply_to_status_id
+    || tweet.in_reply_to_status_id_str
+    || tweet.in_reply_to_user_id
+    || tweet.in_reply_to_user_id_str
+    || tweet.in_reply_to_screen_name )
+    return true
+  else 
+    return false
 }
 
 
