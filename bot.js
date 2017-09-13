@@ -42,45 +42,19 @@ function prepareTwit(i)
   
   console.log(t.text + " set in about: " + remaining / 60000 + "minutes");
   
-  setTimeout(startStream, remaining - 1000*10, i);  // ..(?).. 10 s earlier to ensure we catch the first tweet
+  setTimeout(startStream, remaining - 1000*10, i);  // 10 seconds earlier to ensure we catch the first tweet
   setTimeout(SendTwit, remaining, t.text);
   
-  // Must be something grater than 1 minute (60000ms)
-  //setTimeout(SearchTwits, remaining + 60001, i);
-  //setTimeout(prepareTwit, remaining + 60001, i);
+  // Must be something grater than 1 minute
+  setTimeout(prepareTwit, remaining + 1000*70, i);
 }
 
 function SendTwit(text)
 {
   console.log("Actual time: " + new Date());
-  console.log("GO")
-  //T.post('statuses/update', { status: text }, _callback)
+  //console.log("GO!")
+  T.post('statuses/update', { status: text }, _callback)
 }
-
-/*function SearchTwits(i)
-{
-  var search = timers[i].search;
-  
-  var date = todayDate()
-  T.get('search/tweets', { q: search +' since:' + date, count: 100 }, function(err, data, response) {
-    if (err)
-      console.log(err);
-    else {
-      console.log(data);
-      for (var j = 0; j < data.statuses.length; j++)
-      {
-        if (inTime(i, data.statuses[j]))
-        {
-          var id = data.statuses[j].id_str;
-          console.log("ID: " + id);
-          T.post('favorites/create', { id: id }, function (err, data, response) {
-            console.log(data);
-          });
-        }
-      }
-    }
-  })
-}*/
 
 function startStream(i)
 {
@@ -111,17 +85,6 @@ function stopStream()
     T.currentTwitStream.stop()
   }
 }
-
-/*function todayDate()
-{
-  var now = new Date();
-  
-  var y = now.getFullYear();
-  var m = now.getMonth();
-  var d = now.getDate();
-  
-  return y + "-" + m + "-" + d
-}*/
 
 function inTime(i, tweet)
 {
