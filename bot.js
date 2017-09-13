@@ -52,10 +52,14 @@ function prepareTwit(i)
 function SendTwit(text)
 {
   console.log("Actual time: " + new Date());
-  console.log("GO!")
-  //T.post('statuses/update', { status: text }, _callback)
+  //console.log("GO!")
+  T.post('statuses/update', { status: text }, _callback)
 }
 
+function retweet(id)
+{
+  T.post('statuses/retweet/:id', { id: id }, _callback)
+}
 
 
 var count = 0;
