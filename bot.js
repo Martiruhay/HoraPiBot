@@ -51,9 +51,14 @@ function prepareTwit(i)
 
 function SendTwit(text)
 {
-  console.log("Actual time: " + new Date());
+  console.log("Actual time: " + new Date())
   //console.log("GO!")
   T.post('statuses/update', { status: text }, _callback)
+}
+
+function like(id)
+{
+  T.post('favorites/create', { id: id }, _callback)
 }
 
 function retweet(id)
