@@ -6,6 +6,9 @@ var timers = [
   {
     hour: 4, minute: 14, text: "Hora Pi canaria!", search: "hora pi"
   }
+  ,
+  {
+    hour: 23, minute: 20, text: "(¬_¬)", search: "---test---"  }
 ];
 
 
@@ -42,7 +45,7 @@ function prepareTwit(i)
   setTimeout(startStream, remaining - 1000*10, i);  // 10 seconds earlier to ensure we catch the first tweet
   setTimeout(sendTweet, remaining, t.text);
   
-  // Must be something grater than 1 minute
+  // Must be something grater than 1 minute more
   setTimeout(prepareTwit, remaining + 1000*70, i);
 }
 
@@ -76,7 +79,7 @@ function startStream(i)
   var stream = T.stream('statuses/filter', { track: t.search })
   
   stream.on('tweet', function (tweet) {
-    if (inTime(i, tweet))
+    if (inTime(i, tweet) && !tweet.retweeted)
     {
       like(tweet.id_str)
       retweet(tweet.id_str)
