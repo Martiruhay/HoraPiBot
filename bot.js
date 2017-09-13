@@ -6,9 +6,6 @@ var timers = [
   {
     hour: 4, minute: 14, text: "Hora Pi canaria!", search: "hora pi"
   }
-  ,
-  {
-    hour: 23, minute: 51, text: "(¬_¬)", search: "----test----"  }
 ];
 
 
