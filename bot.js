@@ -5,6 +5,9 @@ var timers = [
   },
   {
     hour: 4, minute: 14, text: "Hora Pi canaria!", search: "hora pi"
+  },
+  {
+    hour: 22, minute: 35, text: "test", search: "-----------test------------"
   }
 ];
 
@@ -49,13 +52,17 @@ function prepareTwit(i)
 function SendTwit(text)
 {
   console.log("Actual time: " + new Date());
-  //console.log("GO!")
-  T.post('statuses/update', { status: text }, _callback)
+  console.log("GO!")
+  //T.post('statuses/update', { status: text }, _callback)
 }
 
+
+
+var count = 0;
 function startStream(i)
 {
   var t = timers[i];
+  count = 0;
   
   console.log("Starting stream: " + t.search)
   
@@ -67,6 +74,7 @@ function startStream(i)
     {
       var tweet_id = tweet.id_str
       T.post('favorites/create', { id: tweet_id }, _callback);
+      count++;
     }
   })
   T.currentTwitStream = stream;
@@ -81,6 +89,8 @@ function stopStream()
     console.log("Stopping stream")
     T.currentTwitStream.stop()
   }
+  
+  console.log("Total (in time): " + count)
 }
 
 function inTime(i, tweet)
