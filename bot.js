@@ -5,9 +5,6 @@ var timers = [
   },
   {
     hour: 4, minute: 14, text: "Hora Pi canaria!", search: "hora pi"
-  },
-  {
-    hour: 3, minute: 28, text: "Test ¯(°..o)/¯", search: "jadsiuofhasdijvnsdvnsdjfksdjkfhaaaaa"
   }
 ];
 
@@ -74,7 +71,7 @@ function startStream(i)
   })
   T.currentTwitStream = stream;
   
-  // Stop the stream after 1 minute
+  // Stop the stream after 1 minute (10 seconds later to ensure we catch the last tweet)
   setTimeout(stopStream, 1000*70);
 }
 
@@ -110,8 +107,7 @@ function inTime(i, tweet)
 
 function _callback(err, data, response)
 {
-  console.log("RESPONSE: " + response)
-  
+  //console.log("RESPONSE: " + response)
   if (err)
     console.log(err)
   else
