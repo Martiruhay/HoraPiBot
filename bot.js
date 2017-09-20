@@ -78,7 +78,7 @@ function startStream(i)
   stream.on('tweet', function (tweet) {
     if (inTime(i, tweet) && !isReply(tweet))
     {
-      like(tweet.id_str)
+      //like(tweet.id_str)
       retweet(tweet.id_str)
       count++;
     }
