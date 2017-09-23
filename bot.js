@@ -1,10 +1,10 @@
 // Configure
 var timers = [
   {
-    hour: 3, minute: 14, text: "Hora Pi!", search: "hora pi"
+    hour: 3, minute: 14, text: "HORA PI", search: "hora pi"
   },
   {
-    hour: 4, minute: 14, text: "Hora Pi canaria!", search: "hora pi"
+    hour: 4, minute: 14, text: "Hora Pi canaria gente", search: "hora pi"
   }
 ];
 
