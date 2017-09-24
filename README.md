@@ -3,10 +3,10 @@
 Twitter bot
 
 ### What does it do?
-- Tweets "Hora Pi!" at 3:14 every day
-- Tweets "Hora Pi canaria!" at 4:14 every day
-- Likes any tweet containing "hora pi" at [3:14-3:15)
-- Likes any tweet containing "hora pi" at [4:14-4:15)
+- Tweets at 3:14 every day
+- Tweets at 4:14 every day
+- Retweets any tweet containing "hora pi" at [3:14-3:15)
+- Retweets any tweet containing "hora pi" at [4:14-4:15)
 
 
 #### TO DO:
