@@ -1,11 +1,24 @@
 // Configure
 var timers = [
   {
-    hour: 3, minute: 14, text: "HORA PI", search: "hora pi"
+    hour: 3, minute: 14, text: ["Hora Pi!",
+                                "HORA PI",
+                                "hORA pI",
+                                "Es la Hora Pi!",
+                                "Piiiiiiiiii es la Hora Pi!"], search: "hora pi"
   },
   {
-    hour: 4, minute: 14, text: "Hora Pi canaria gente", search: "hora pi"
-  }
+    hour: 4, minute: 14, text: ["Hora Pi canaria!",
+                                "Hora Pi en Canarias!",
+                                "hORA pI cANARIA",
+                                "Piiiiiiiiii es la Hora Pi en Canarias!"], search: "hora pi"
+  }/*,
+  {
+    hour: 23, minute: 35, text: ["Test -> 0",
+                                "Test -> 1",
+                                "Test -> 2",
+                                "Test -> 3"], search: "hora pi"
+  }*/
 ];
 
 
@@ -37,10 +50,12 @@ function prepareTwit(i)
      remaining += 86400000; // tomorrow
   }
   
-  console.log(t.text + " set in about: " + remaining / 60000 + "minutes");
+  var text = selectTweetText(i);
+  
+  console.log(text + " set in about: " + remaining / 60000 + "minutes");
   
   setTimeout(startStream, remaining - 1000*10, i);  // 10 seconds earlier to ensure we catch the first tweet
-  setTimeout(sendTweet, remaining, t.text);
+  setTimeout(sendTweet, remaining, text);
   
   // Must be something grater than 1 minute more
   setTimeout(prepareTwit, remaining + 1000*70, i);
@@ -130,6 +145,17 @@ function isReply(tweet) {
     return true
   else 
     return false
+}
+
+function selectTweetText(i){
+  var t = timers[i];
+  
+  var ran = Math.floor(Math.random() * t.text.length);
+  
+  var text = t.text[ran];
+  console.log("Random number is " + ran + ". Text is: " + text);
+  
+  return text;
 }
 
 
