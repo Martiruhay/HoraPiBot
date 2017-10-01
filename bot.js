@@ -150,7 +150,7 @@ function selectTweetText(i){
   var ran = Math.floor(Math.random() * t.text.length);
   
   var text = t.text[ran];
-  console.log("Random number is " + ran + ". Text is: " + text);
+  //console.log("Random number is " + ran + ". Text is: " + text);
   
   return text;
 }
