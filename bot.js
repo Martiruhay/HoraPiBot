@@ -1,24 +1,21 @@
 // Configure
 var timers = [
-  {
+  /*{
     hour: 3, minute: 14, text: ["Hora Pi!",
                                 "HORA PI",
                                 "hORA pI",
                                 "Es la Hora Pi!",
                                 "Piiiiiiiiii es la Hora Pi!"], search: "hora pi"
-  },
+  },*/
   {
     hour: 4, minute: 14, text: ["Hora Pi canaria!",
                                 "Hora Pi en Canarias!",
                                 "hORA pI cANARIA",
                                 "Piiiiiiiiii es la Hora Pi en Canarias!"], search: "hora pi"
-  }/*,
+  },
   {
-    hour: 23, minute: 35, text: ["Test -> 0",
-                                "Test -> 1",
-                                "Test -> 2",
-                                "Test -> 3"], search: "hora pi"
-  }*/
+    hour: 3, minute: 14, text: ["Hora Pi en un país fascista"], search: "hora pi"
+  }
 ];
 
 
