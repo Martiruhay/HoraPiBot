@@ -9,7 +9,7 @@ fi
 echo "Starting bot..."
 
 # Start bot
-node bot.js > logs &
+nohup node bot.js >> logs &
 echo $!
 echo $! > pid
 
